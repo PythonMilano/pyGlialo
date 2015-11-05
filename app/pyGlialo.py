@@ -3,7 +3,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from random import randint
-
 from app.secrets import meetup_api_key
 
 
