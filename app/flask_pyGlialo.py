@@ -11,7 +11,7 @@ list_of_winners = []
 @app.route('/')
 def spread_the_goodies():
     winner_json = extract_winner(meetup_json)
-    winner = {'name': winner_json['name']}
+    winner = {'name': winner_json['name'], 'member_id': winner_json['member_id']}
     return render_template('index.html', winner=winner, winners=list_of_winners, lead_text='Rolling for the goodies')
 
 

@@ -23,7 +23,13 @@
 
         <h1>Ecco i vincitori</h1>
 
-        <h2>{{ winners }}</h2>
+        <h2>
+            {% for user in winners %}
+                {{ user }}
+                {% if not loop.last %}<br>
+                {% endif %}
+            {% endfor %}
+        </h2>
     </div>
 
     <footer class="footer">

@@ -25,7 +25,7 @@
 
         <h1>{{ winner.name }}</h1>
 
-        <p class="lead"><a href="#">Meetup Profile</a></p>
+        <p class="lead"><a href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank">Meetup Profile</a></p>
 
         <p>
             <a class="btn btn-lg btn-success" href="save/{{ winner.name }}" role="button">Claim the prize!</a>
@@ -43,13 +43,19 @@
         <div class="col-lg-12">
             <h4>Winner So Far</h4>
 
-            <p>{{ winners }}</p>
+            <p>
+                {% for user in winners %}
+                    {{ user }}
+                    {% if not loop.last %},
+                    {% endif %}
+                {% endfor %}
+            </p>
         </div>
     </div>
 
     <footer class="footer">
-        <p>&copy; <a href="http://pythonmilano.xyz" target="_blank"> python milano</a>  - pyGlialo</p>
-{#        <p>made with <3 with Flask</p>#}
+        <p>&copy; <a href="http://pythonmilano.xyz" target="_blank"> python milano</a> - pyGlialo</p>
+        {#        <p>made with <3 with Flask</p>#}
     </footer>
 
 </div> <!-- /container -->
