@@ -34,15 +34,15 @@ def get_meetup_json():
     return data
 
 
-def write_winners_to_file(winners):
-    out_file = open("winner_list.txt", "w")
-    out_file.write(get_time_as_string())
-    for winner in winners:
-        out_file.write(winner)
-    out_file.close()
-    return winners
+def save_winners_list(winners):
+    with open("winner_list.txt", "w") as out_file:
+        out_file.write("File generato il: %s\n" % get_time_as_string())
+        out_file.write("Lista vincitori per i goodies")
+        for winner in winners:
+            out_file.write("%s\n" % winner)
+    pass
 
 
 def get_time_as_string():
-    date_string = datetime.datetime.now()
+    date_string = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
     return date_string
