@@ -1,16 +1,17 @@
 from flask import Flask
 
-from pyGlialo import random_goodies_giveaway
+from pyGlialo import extract_winner, get_meetup_json
 
 app = Flask(__name__)
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+meetup_json = get_meetup_json()
 
-@app.route('/p')
+
+@app.route('/')
 def spread_the_goodies():
-    return random_goodies_giveaway()
+    winner = extract_winner(meetup_json)
+    return 'Il vincitore è: ' + winner['name']
+
 
 if __name__ == '__main__':
     app.run()
