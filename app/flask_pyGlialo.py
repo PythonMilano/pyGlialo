@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for
-from app.pyGlialo import extract_winner, get_meetup_json
+from app.pyGlialo import extract_winner, get_meetup_json, write_winners_to_file
 
 app = Flask(__name__)
 
@@ -15,8 +15,8 @@ def spread_the_goodies():
     return render_template('index.html', winner=winner, winners=list_of_winners, lead_text='Rolling for the goodies')
 
 
-@app.route('/save/<name>')
-def save_winner(name):
+@app.route('/save/<name>/<id>')
+def save_winner(name, id):
     if name not in list_of_winners:
         list_of_winners.append(name)
     return redirect(url_for('spread_the_goodies'))
@@ -30,6 +30,7 @@ def pass_extraction():
 
 @app.route('/finalize')
 def finalize_the_goodies():
+    # write_winners_to_file(list_of_winners)
     return render_template('finalize.html', winners=list_of_winners)
 
 
