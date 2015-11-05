@@ -16,14 +16,14 @@ def spin_the_wheel(data):
     return randint(0, max_int)
 
 
-event_id = get_event_id()
-url = "https://api.meetup.com/2/rsvps?offset=0&format=json&event_id=" + \
-      event_id + \
-      "&photo-host=public&page=20&fields=&order=event&desc=false&sig_id=99027442&sig=" + \
-      meetup_api_key
-response = urllib.request.urlopen(url)
-data = json.loads(response.read().decode("utf-8"))
+def random_goodies_giveaway():
+    event_id = get_event_id()
+    url = "https://api.meetup.com/2/rsvps?offset=0&format=json&event_id=" + \
+          event_id + \
+          "&photo-host=public&page=20&fields=&order=event&desc=false&sig_id=99027442&sig=" + \
+          meetup_api_key
+    response = urllib.request.urlopen(url)
+    data = json.loads(response.read().decode("utf-8"))
+    lucky_number = spin_the_wheel(data)
+    return data['results'][lucky_number]['member']['name']
 
-lucky_number = spin_the_wheel(data)
-
-print(data['results'][lucky_number]['member']['name'])
