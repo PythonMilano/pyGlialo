@@ -2,8 +2,7 @@
 our solution to spread the goodies
 
 ## how to use
-### this use Python 3.5
-It does not uses another library apart from the standard library
+### this use Python 3.5 and Flask
 
 Create a file named "secrets.py" with the string "api_key" inside, use this to assign your personal api key from meetup
 

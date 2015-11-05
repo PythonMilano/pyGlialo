@@ -4,7 +4,7 @@ import urllib.parse
 import urllib.request
 from random import randint
 
-from secrets import meetup_api_key
+from app.secrets import meetup_api_key
 
 
 def get_event_id():
