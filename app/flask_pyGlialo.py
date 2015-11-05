@@ -19,13 +19,13 @@ def spread_the_goodies():
 def save_winner(name):
     if name not in list_of_winners:
         list_of_winners.append(name)
-    return redirect('http://localhost:5000')
+    return redirect(url_for('spread_the_goodies'))
 
 
 @app.route('/pass')
 def pass_extraction():
     list_of_winners.append('empty_slot')
-    return redirect('http://localhost:5000')
+    return redirect(url_for('spread_the_goodies'))
 
 
 @app.route('/finalize')
