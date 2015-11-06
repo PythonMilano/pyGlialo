@@ -1,9 +1,5 @@
 <!DOCTYPE html>
-
-
 <html lang="en">
-
-
 <head>
 
     <meta charset="UTF-8">
@@ -24,6 +20,8 @@
         <p class="lead">{{ lead_text }}</p>
 
         <h1>{{ winner.name }}</h1>
+
+        <img src="{{ winner.photo_url }}">
 
         <p class="lead"><a href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank">Meetup
             Profile</a></p>
