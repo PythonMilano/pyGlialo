@@ -61,6 +61,3 @@ def safe_photo_url(winner_json):
         return winner_json['member_photo']['thumb_link']
     else:
         return "/static/img/No_image.png"
-
-
-pass
