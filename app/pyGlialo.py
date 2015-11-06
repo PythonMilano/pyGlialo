@@ -37,7 +37,7 @@ def get_meetup_json():
 def save_winners_list(winners):
     with open("winner_list.txt", "w") as out_file:
         out_file.write("File generato il: %s\n" % get_time_as_string())
-        out_file.write("Lista vincitori per i goodies")
+        out_file.write("Lista vincitori per i goodies\n")
         for winner in winners:
             out_file.write("%s\n" % winner)
     pass
