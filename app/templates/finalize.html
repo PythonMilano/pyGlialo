@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>pyGlialo - giving away the goodies</title>
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="static/css/jumbotron-narrow.css">
+</head>
+<body>
+<div class="container">
+    <div class="header clearfix">
+        <h2 class="text-muted">pyGlialo</h2>
+        <i> giving away the goodies</i>
+    </div>
+
+    <div class="jumbotron">
+
+        <h1>Ecco i vincitori</h1>
+
+        <h2>
+            {% for user in winners %}
+                {{ user }}
+                {% if not loop.last %}<br>
+                {% endif %}
+            {% endfor %}
+        </h2>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; <a href="http://pythonmilano.xyz" target="_blank"> python milano</a> - pyGlialo</p>
+        {#        <p>made with <3 with Flask</p>#}
+    </footer>
+
+</div> <!-- /container -->
+
+<script src="static/js/jquery.min.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+
+</body>
+</html>
