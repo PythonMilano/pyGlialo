@@ -18,6 +18,14 @@ def spin_the_wheel(meetup_json):
     return randint(0, max_int)
 
 
+def extract_safe_winner(meetup_json):
+    winner_json = extract_winner(meetup_json)
+    if winner_json['response'] == 'yes':
+        return winner_json
+    else:
+        extract_winner(meetup_json)
+
+
 def extract_winner(meetup_json):
     lucky_number = spin_the_wheel(meetup_json)
     return meetup_json['results'][lucky_number]
@@ -53,4 +61,6 @@ def safe_photo_url(winner_json):
         return winner_json['member_photo']['thumb_link']
     else:
         return "/static/img/No_image.png"
+
+
 pass

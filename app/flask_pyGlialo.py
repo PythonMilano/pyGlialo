@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 
-from app.pyGlialo import extract_winner, get_meetup_json, save_winners_list, safe_photo_url
+from app.pyGlialo import extract_safe_winner, get_meetup_json, save_winners_list, safe_photo_url
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ list_of_winners = []
 
 @app.route('/')
 def spread_the_goodies():
-    winner_json = extract_winner(meetup_json)
+    winner_json = extract_safe_winner(meetup_json)
     winner = {
         'name': winner_json['member']['name'],
         'member_id': winner_json['member']['member_id'],
