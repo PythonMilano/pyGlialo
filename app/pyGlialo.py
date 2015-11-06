@@ -18,9 +18,17 @@ def spin_the_wheel(meetup_json):
     return randint(0, max_int)
 
 
+def extract_safe_winner(meetup_json):
+    winner_json = extract_winner(meetup_json)
+    if winner_json['response'] == 'yes':
+        return winner_json
+    else:
+        extract_winner(meetup_json)
+
+
 def extract_winner(meetup_json):
     lucky_number = spin_the_wheel(meetup_json)
-    return meetup_json['results'][lucky_number]['member']
+    return meetup_json['results'][lucky_number]
 
 
 def get_meetup_json():
@@ -46,3 +54,10 @@ def save_winners_list(winners):
 def get_time_as_string():
     date_string = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
     return date_string
+
+
+def safe_photo_url(winner_json):
+    if 'member_photo' in winner_json:
+        return winner_json['member_photo']['thumb_link']
+    else:
+        return "/static/img/No_image.png"
