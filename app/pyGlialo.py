@@ -13,8 +13,8 @@ def get_event_id():
     return "226276326"
 
 
-def spin_the_wheel(meetup_json):
-    max_int = len(meetup_json['results']) - 1
+def spin_the_wheel(some_meetup_json):
+    max_int = len(some_meetup_json['results']) - 1
     return randint(0, max_int)
 
 
@@ -23,12 +23,12 @@ def extract_safe_winner(meetup_json):
     if winner_json['response'] == 'yes':
         return winner_json
     else:
-        extract_winner(meetup_json)
+        return winner_json
 
 
-def extract_winner(meetup_json):
-    lucky_number = spin_the_wheel(meetup_json)
-    return meetup_json['results'][lucky_number]
+def extract_winner(some_meetup_json):
+    lucky_number = spin_the_wheel(some_meetup_json)
+    return some_meetup_json['results'][lucky_number]
 
 
 def get_meetup_json():
@@ -60,4 +60,9 @@ def safe_photo_url(winner_json):
     if 'member_photo' in winner_json:
         return winner_json['member_photo']['thumb_link']
     else:
-        return "/static/img/No_image.png"
+        return "/img/No_image.png"
+
+
+MEETUP_JSON = get_meetup_json()
+
+LIST_OF_WINNERS = []
