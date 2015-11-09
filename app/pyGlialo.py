@@ -60,7 +60,7 @@ def safe_photo_url(winner_json):
     if 'member_photo' in winner_json:
         return winner_json['member_photo']['thumb_link']
     else:
-        return "/img/No_image.png"
+        return "/static/img/No_image.png"
 
 
 MEETUP_JSON = get_meetup_json()

@@ -43,7 +43,7 @@ def reset_app():
     winner = {
         'name': 'PyGlialo is Reset',
         'member_id': '000000',
-        'photo_url': 'img/reset.jpg'
+        'photo_url': '/static/img/reset.jpg'
     }
     reset_text = 'Reset Successful'
     return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
