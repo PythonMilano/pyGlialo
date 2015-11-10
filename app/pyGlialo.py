@@ -63,6 +63,25 @@ def safe_photo_url(winner_json):
         return "/static/img/No_image.png"
 
 
+def find_index_of(name):
+    max_int = len(MEETUP_JSON['results']) - 1
+    for i in range(0, max_int):
+        if MEETUP_JSON['results'][i]['member']['name'] == name:
+            return i
+    return None
+
+
+def remove_member_from_pool(name):
+    index = find_index_of(name)
+    MEETUP_JSON['results'].pop(index)
+    pass
+
+
+def get_full_details_of(name):
+    index = find_index_of(name)
+    return MEETUP_JSON['results'][index]
+
+
 MEETUP_JSON = get_meetup_json()
 
 LIST_OF_WINNERS = []
