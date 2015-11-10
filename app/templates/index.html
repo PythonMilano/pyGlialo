@@ -19,7 +19,12 @@
         <br>
 
         <p>
-            <a href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank">
+            <a {% if winner.member_id != '000000' %}
+                href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank"
+                {% else %}
+                href="/" target="_self"
+            {% endif %}
+               >
                 <img src="{{ winner.photo_url }}">
             </a>
         </p>

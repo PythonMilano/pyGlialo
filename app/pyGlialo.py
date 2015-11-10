@@ -52,7 +52,7 @@ def save_winners_list(winners):
 
 
 def get_time_as_string():
-    date_string = datetime.datetime.now().strftime("%Y-%m-%d_%H%M%S")
+    date_string = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
     return date_string
 
 
