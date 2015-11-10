@@ -23,7 +23,7 @@ def extract_safe_winner(meetup_json):
     if winner_json['response'] == 'yes':
         return winner_json
     else:
-        return winner_json
+        return extract_winner(meetup_json)
 
 
 def extract_winner(some_meetup_json):
