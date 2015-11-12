@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 
-from app.pyGlialo import *
+from pyGlialo import *
 
 app = Flask(__name__)
 
