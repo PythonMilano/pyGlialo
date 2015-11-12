@@ -14,7 +14,6 @@ def spread_the_goodies():
         'photo_url': safe_photo_url(winner_json)
     }
     lead_text = 'Rolling for goodies Number %s' % str(len(LIST_OF_WINNERS) + 1)
-    remove_member_from_pool(winner['name'])
     print(len(MEETUP_JSON['results']))
     return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
@@ -23,6 +22,7 @@ def spread_the_goodies():
 def save_winner(name):
     if name not in LIST_OF_WINNERS:
         LIST_OF_WINNERS.append(name)
+        remove_member_from_pool(name)
     return redirect(url_for('spread_the_goodies'))
 
 
