@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 
-from app.pyGlialo import extract_safe_winner, get_meetup_json, save_winners_list, safe_photo_url
+from pyGlialo import extract_safe_winner, get_meetup_json, save_winners_list, safe_photo_url
 
 app = Flask(__name__)
 
