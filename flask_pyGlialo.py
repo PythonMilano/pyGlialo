@@ -51,14 +51,5 @@ def reset_app():
     return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
 
 
-@app.route('/remove/<name>')
-def remove_absent(name):
-    # member_to_eliminate = get_full_details_of(name)
-    remove_member_from_pool(name)
-    # reset_text = 'Removed from POOL'
-    # return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
-    return redirect(url_for('spread_the_goodies'))
-
-
 if __name__ == '__main__':
     app.run(debug=True)
