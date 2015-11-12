@@ -23,6 +23,7 @@ def extract_safe_winner(meetup_json):
     if winner_json['response'] == 'yes':
         return winner_json
     else:
+        remove_member_from_pool(winner_json['member']['name'])
         return extract_winner(meetup_json)
 
 
@@ -48,7 +49,6 @@ def save_winners_list(winners):
         out_file.write("Lista vincitori per i goodies\n")
         for winner in winners:
             out_file.write("%s\n" % winner)
-    pass
 
 
 def get_time_as_string():
@@ -74,7 +74,6 @@ def find_index_of(name):
 def remove_member_from_pool(name):
     index = find_index_of(name)
     MEETUP_JSON['results'].pop(index)
-    pass
 
 
 def get_full_details_of(name):

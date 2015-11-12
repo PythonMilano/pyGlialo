@@ -14,6 +14,7 @@ def spread_the_goodies():
         'photo_url': safe_photo_url(winner_json)
     }
     lead_text = 'Rolling for goodies Number %s' % str(len(LIST_OF_WINNERS) + 1)
+    remove_member_from_pool(winner['name'])
     print(len(MEETUP_JSON['results']))
     return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
@@ -52,9 +53,9 @@ def reset_app():
 
 @app.route('/remove/<name>')
 def remove_absent(name):
-    member_to_eliminate = get_full_details_of(name)
+    # member_to_eliminate = get_full_details_of(name)
     remove_member_from_pool(name)
-    reset_text = 'Removed from POOL'
+    # reset_text = 'Removed from POOL'
     # return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
     return redirect(url_for('spread_the_goodies'))
 
