@@ -19,7 +19,12 @@
         <br>
 
         <p>
-            <a href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank">
+            <a {% if winner.member_id != '000000' %}
+                href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank"
+            {% else %}
+                href="/" target="_self"
+            {% endif %}
+            >
                 <img src="{{ winner.photo_url }}">
             </a>
         </p>
@@ -58,7 +63,10 @@
     <footer class="footer">
         <p>&copy; <a href="http://pythonmilano.xyz" target="_blank"> python milano</a> - pyGlialo</p>
         {#        <p>made with <3 with Flask</p>#}
+        <div id="debug">
+        </div>
     </footer>
+
 </div> <!-- /container -->
 <script src="static/js/jquery.min.js"></script>
 <script src="static/js/bootstrap.min.js"></script>
