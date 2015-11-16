@@ -36,7 +36,7 @@ def get_meetup_json():
     event_id = get_event_id()
     url = "https://api.meetup.com/2/rsvps?offset=0&format=json&event_id=" + \
           event_id + \
-          "&photo-host=public&page=20&fields=&order=event&desc=false&sig_id=99027442&sig=" + \
+          "&key=" + \
           meetup_api_key
     response = urllib.request.urlopen(url)
     data = json.loads(response.read().decode("utf-8"))
