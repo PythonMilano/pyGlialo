@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def spread_the_goodies():
+    # TODO creare la pagina Random eusare questa come benvenuto
     winner_json = extract_safe_winner(MEETUP_JSON)
     winner = {
         'name': winner_json['member']['name'],
