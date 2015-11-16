@@ -6,8 +6,12 @@ app = Flask(__name__)
 
 
 @app.route('/')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/random')
 def spread_the_goodies():
-    # TODO creare la pagina Random eusare questa come benvenuto
     winner_json = extract_safe_winner(MEETUP_JSON)
     winner = {
         'name': winner_json['member']['name'],
@@ -16,7 +20,7 @@ def spread_the_goodies():
     }
     lead_text = 'Rolling for goodies Number %s' % str(len(LIST_OF_WINNERS) + 1)
     print(len(MEETUP_JSON['results']))
-    return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
+    return render_template('random.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
 
 @app.route('/save/<name>/')
@@ -49,7 +53,7 @@ def reset_app():
         'photo_url': '/static/img/Reset_Icon.png'
     }
     reset_text = 'Reset Successful'
-    return render_template('index.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
+    return render_template('random.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=reset_text)
 
 
 if __name__ == '__main__':
