@@ -1,5 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
-
+from flask import Flask, render_template, redirect, url_for, request
 from pyGlialo import *
 
 app = Flask(__name__)
@@ -28,7 +27,17 @@ def save_winner(name):
     if name not in LIST_OF_WINNERS:
         LIST_OF_WINNERS.append(name)
         remove_member_from_pool(name)
-    return redirect(url_for('spread_the_goodies'))
+    return redirect(url_for('saved'))
+
+
+@app.route('/saved')
+def saved():
+    name = LIST_OF_WINNERS[-1]
+    winner = {
+        'name': name
+    }
+    lead_text = 'Winner for slot %s' % str(len(LIST_OF_WINNERS) + 1)
+    return render_template('saved.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
 
 @app.route('/pass')
