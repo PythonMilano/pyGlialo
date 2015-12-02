@@ -36,14 +36,15 @@ def saved():
     winner = {
         'name': name
     }
-    lead_text = 'Winner for slot %s' % str(len(LIST_OF_WINNERS) + 1)
+    lead_text = 'Winner for slot %s' % str(len(LIST_OF_WINNERS))
     return render_template('saved.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
 
 @app.route('/pass')
 def pass_extraction():
     LIST_OF_WINNERS.append('empty_slot')
-    return redirect(url_for('spread_the_goodies'))
+    lead_text = 'Slot %s is empty :(' % str(len(LIST_OF_WINNERS))
+    return render_template('pass.html', winners=LIST_OF_WINNERS, lead_text=lead_text)
 
 
 @app.route('/finalize')
