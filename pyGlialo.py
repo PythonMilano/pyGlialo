@@ -4,13 +4,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from random import randint
-
 from secrets import meetup_api_key
 
 
 def get_event_id():
     # TODO recuperare l'id da https://api.meetup.com/2/events? -> result[0].ID
-    return "226276326"
+    return "222809845"
 
 
 def spin_the_wheel(some_meetup_json):
@@ -58,7 +57,7 @@ def get_time_as_string():
 
 def safe_photo_url(winner_json):
     if 'member_photo' in winner_json:
-        return winner_json['member_photo']['thumb_link']
+        return winner_json['member_photo']['photo_link']
     else:
         return "/static/img/No_image.png"
 
