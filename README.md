@@ -9,9 +9,9 @@ _(tested on Python 3.4+ and flask 0.10+)_
 
  1. checkout the project, if you want to contribute use the `flask` branch
 
- 1. Create a file named `secrets.py` with the string `api_key` inside, use this to assign
+ 1. Create a file named `secrets.py` with the string `meetup_api_key` inside, use this to assign
 [your personal api key from meetup](https://secure.meetup.com/it/meetup_api/key/),  
-it should look like something like this (31 char long, this one is fake):```api_key = '781a5b2c2d7e332f803f325625361e9'```
+it should look like something like this (31 char long, this one is fake):```meetup_api_key = '781a5b2c2d7e332f803f325625361e9'```
 
  1. Install `flask` using either `pip3` or `venv`
 
@@ -27,4 +27,9 @@ To run the application use
 
 ### Bad Things
 __Next MeetUp__
-Right now the meetUp id is hardcoded in `get_event_id()` 
+Right now the meetUp id is hardcoded in `get_event_id()` (still hardcoded) 
+
+### Credits
+- the Python Milano logo is found [here](https://github.com/PythonMilano/logo)
+- winning banana is from [clker](http://www.clker.com/clipart-52027.html)
+- sad banana is from [DeviantArt user rollingjennyh](http://rollingjennyh.deviantart.com/art/Sad-Banana-352394110)
