@@ -4,7 +4,6 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from random import randint
-
 from secrets import meetup_api_key
 
 
@@ -58,7 +57,7 @@ def get_time_as_string():
 
 def safe_photo_url(winner_json):
     if 'member_photo' in winner_json:
-        return winner_json['member_photo']['thumb_link']
+        return winner_json['member_photo']['photo_link']
     else:
         return "/static/img/No_image.png"
 
