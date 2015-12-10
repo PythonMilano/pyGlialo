@@ -77,3 +77,13 @@ body {
     border-bottom: 0;
   }
 }
+/* Box for important info */
+.important-info {
+  background-color: blanchedalmond;
+  border: 2px solid #08186F;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-bottom: 15px;
+}
