@@ -3,7 +3,6 @@ from pyGlialo import *
 
 app = Flask(__name__)
 
-
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -18,7 +17,7 @@ def spread_the_goodies():
         'photo_url': safe_photo_url(winner_json)
     }
     lead_text = 'Rolling for goodies Number %s' % str(len(LIST_OF_WINNERS) + 1)
-    print(len(MEETUP_JSON['results']))
+    # print(len(MEETUP_JSON['results']))
     return render_template('random.html', winner=winner, winners=LIST_OF_WINNERS, lead_text=lead_text)
 
 

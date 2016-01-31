@@ -63,14 +63,15 @@ def safe_photo_url(winner_json):
 
 
 def find_index_of(name):
-    max_int = len(MEETUP_JSON['results']) - 1
-    for i in range(0, max_int):
-        if MEETUP_JSON['results'][i]['member']['name'] == name:
+    for i, result in enumerate(MEETUP_JSON['results']):
+        member_name = result['member']['name']
+        if member_name == name:
             return i
-    return None
+    return NameError(name)
 
 
 def remove_member_from_pool(name):
+    # print('Removing: ' + name)
     index = find_index_of(name)
     MEETUP_JSON['results'].pop(index)
 
