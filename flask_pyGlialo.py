@@ -1,7 +1,10 @@
-from pyGlialo import *
 from flask import Flask, render_template, redirect, url_for
+import pyGlialo as py
+from pyGlialo import MEETUP_JSON, LIST_OF_WINNERS
+
 
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -10,11 +13,11 @@ def index():
 
 @app.route('/random')
 def spread_the_goodies():
-    winner_json = extract_safe_winner(MEETUP_JSON)
+    winner_json = py.extract_safe_winner(MEETUP_JSON)
     winner = {
         'name': winner_json['member']['name'],
         'member_id': winner_json['member']['member_id'],
-        'photo_url': safe_photo_url(winner_json)
+        'photo_url': py.safe_photo_url(winner_json)
     }
     lead_text = 'Rolling for goodies Number %s' % str(len(LIST_OF_WINNERS) + 1)
     # print(len(MEETUP_JSON['results']))
@@ -25,7 +28,7 @@ def spread_the_goodies():
 def save_winner(name):
     if name not in LIST_OF_WINNERS:
         LIST_OF_WINNERS.append(name)
-        remove_member_from_pool(name)
+        py.remove_member_from_pool(name)
     return redirect(url_for('saved'))
 
 
@@ -48,13 +51,13 @@ def pass_extraction():
 
 @app.route('/finalize')
 def finalize_the_goodies():
-    save_winners_list(LIST_OF_WINNERS)
+    py.save_winners_list(LIST_OF_WINNERS)
     return render_template('finalize.html', winners=LIST_OF_WINNERS)
 
 
 @app.route('/reset')
 def reset_app():
-    MEETUP_JSON = get_meetup_json()  # reset_meetup_json()
+    MEETUP_JSON = py.get_meetup_json()  # reset_meetup_json()
     LIST_OF_WINNERS.clear()
     winner = {
         'name': 'PyGlialo is Reset',
