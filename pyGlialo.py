@@ -4,12 +4,12 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from random import randint
-from .secrets import meetup_api_key
+from secrets import meetup_api_key
 
 
 def get_event_id():
     # TODO recuperare l'id da https://api.meetup.com/2/events? -> result[0].ID
-    return "227334735"
+    return "228109996"
 
 
 def spin_the_wheel(some_meetup_json):
