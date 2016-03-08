@@ -5,17 +5,15 @@ import urllib.parse
 import urllib.request
 from random import randint
 from secrets import meetup_api_key
-
+import time
 
 def get_event_id():
     url = "https://api.meetup.com/Python-Milano/events"
     response = urllib.request.urlopen(url)
     data = json.loads(response.read().decode("utf-8"))
-    for event in data:
-      print(" --> Found event "+event['name']+ " at time "+str(event['time']))
-      return str(event['id'])
-    #return "228109996"
-
+    nearest_event = min(data, key = lambda event:abs(event['time'] - time.time()))
+    print(" --> Nearest event in time: "+nearest_event['name']+ " at time "+str(nearest_event['time']))
+    return str(nearest_event['id'])
 
 def spin_the_wheel(some_meetup_json):
     max_int = len(some_meetup_json['results']) - 1
