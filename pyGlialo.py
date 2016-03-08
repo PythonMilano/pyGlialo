@@ -8,7 +8,6 @@ from secrets import meetup_api_key
 
 
 def get_event_id():
-    # TODO recuperare l'id da https://api.meetup.com/2/events? -> result[0].ID
     url = "https://api.meetup.com/Python-Milano/events"
     response = urllib.request.urlopen(url)
     data = json.loads(response.read().decode("utf-8"))
