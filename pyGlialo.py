@@ -7,13 +7,13 @@ from random import randint
 from secrets import meetup_api_key
 import time
 
-def get_event_id():
+def get_event():
     url = "https://api.meetup.com/Python-Milano/events"
     response = urllib.request.urlopen(url)
     data = json.loads(response.read().decode("utf-8"))
     nearest_event = min(data, key = lambda event:abs(event['time'] - time.time()))
     print(" --> Nearest event in time: "+nearest_event['name']+ " at time "+str(nearest_event['time']))
-    return str(nearest_event['id'])
+    return nearest_event
 
 def spin_the_wheel(some_meetup_json):
     max_int = len(some_meetup_json['results']) - 1
@@ -35,7 +35,7 @@ def extract_winner(some_meetup_json):
 
 
 def get_meetup_json():
-    event_id = get_event_id()
+    event_id = get_event()['id']
     url = "https://api.meetup.com/2/rsvps?offset=0&format=json&event_id=" + \
           event_id + \
           "&key=" + \
