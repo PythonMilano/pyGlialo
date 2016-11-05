@@ -31,17 +31,19 @@
 
         <h1>{{ winner.name }}</h1>
         <br>
-
-        <p>
-            <a class="btn btn-lg btn-success" href="save/{{ winner.name }}" role="button">Claim the prize!</a>
-            <a class="btn btn-lg btn-warning" href="random" role="button">Another one</a>
-        </p>
-
-        <p>
-            <a class="btn btn-lg btn-danger" href="pass" role="button">Leave slot empty</a>
-        </p>
-
-        <p><a class="btn btn-lg btn-primary" href="finalize" role="button">Finalize</a></p>
+        
+        {% if winner %}
+            <p>
+                <a class="btn btn-lg btn-success" href="save/{{ winner.name }}" role="button">Claim the prize!</a>
+                <a class="btn btn-lg btn-warning" href="random" role="button">Another one</a>
+            </p>
+            <p>
+                <a class="btn btn-lg btn-danger" href="pass" role="button">Leave slot empty</a>
+            </p>
+            <p>
+                <a class="btn btn-lg btn-primary" href="finalize" role="button">Finalize</a>
+            </p>
+        {% endif %}
     </div>
 
     <div class="row marketing">
