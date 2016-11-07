@@ -66,4 +66,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# Project
+tmp/
+winner_list*.txt
+
 # Created by .ignore support plugin (hsz.mobi)
+

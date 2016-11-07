@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
-from pyglialo import PyGlialo
 
+from pyglialo import PyGlialo
 
 app = Flask(__name__)
 piglialo = PyGlialo()
@@ -11,10 +11,12 @@ piglialo.load_meetup_data()
 def index():
     return render_template('index.html', event=piglialo.event)
 
+
 @app.route('/reset')
 def reset_app():
     piglialo.load_meetup_data()
-    return redirect("/")
+    return redirect(url_for('index'))
+
 
 @app.route('/random')
 def spread_the_goodies():
@@ -25,12 +27,14 @@ def spread_the_goodies():
         lead_text = 'No one else can win!!!'
     return render_template('random.html', winner=piglialo.winner, winners=piglialo.list_of_winners, lead_text=lead_text)
 
+
 @app.route('/save/<name>/')
 def save_winner(name):
     if name not in piglialo.list_of_winners:
         piglialo.list_of_winners.append(name)
         piglialo.remove_rsvp(name)
     return redirect(url_for('saved'))
+
 
 @app.route('/saved')
 def saved():
@@ -41,11 +45,13 @@ def saved():
     lead_text = 'Winner for slot {}'.format(len(piglialo.list_of_winners))
     return render_template('saved.html', winner=winner, winners=piglialo.list_of_winners, lead_text=lead_text)
 
+
 @app.route('/pass')
 def pass_extraction():
     piglialo.list_of_winners.append('empty_slot')
     lead_text = 'Slot {} is empty :('.format(len(piglialo.list_of_winners))
     return render_template('pass.html', winners=piglialo.list_of_winners, lead_text=lead_text)
+
 
 @app.route('/finalize')
 def finalize_the_goodies():
