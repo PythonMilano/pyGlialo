@@ -42,7 +42,7 @@ class PyGlialo(object):
                 self.winner = {
                     'name': winner['member']['name'],
                     'member_id': winner['member']['member_id'],
-                    'photo_url': winner.get('member_photo', {}).get('photo_link', '/static/img/No_image.png')
+                    'photo_url': winner.get('member_photo', {}).get('photo_link', '/static/img/no_image.png')
                 }
             else:
                 self.extract_safe_winner()
