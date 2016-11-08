@@ -19,14 +19,17 @@ To run the application use
 
 `python3 flask_pyGlialo.py`
 
-###Branches
+### Branches
+
  - _master_: stable branch (I hope so :P)
  - _develop_: branch for the latest development, if you want to contribute this is the one for you
 
 ### Bad Things
+
 None Right Now
 
 ### Credits
-- the Python Milano logo is found [here](https://github.com/PythonMilano/logo)
+
+- the Python Milano logo is from [here](https://github.com/PythonMilano/logo)
 - winning banana is from [clker](http://www.clker.com/clipart-52027.html)
 - sad banana is from [DeviantArt user rollingjennyh](http://rollingjennyh.deviantart.com/art/Sad-Banana-352394110)
