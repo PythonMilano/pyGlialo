@@ -10,14 +10,13 @@ cov = coverage(branch=True, omit=['*/flask/*',
                                   'tests.py'])
 cov.start()
 
-import os
-import unittest
-from unittest.mock import patch, MagicMock
-
-from config import URL_EVENTS
-from pyglialo import PyGlialo, get_data_from_url
-
+import os  # noqa
+import unittest  # noqa
+from unittest.mock import patch, MagicMock  # noqa
+from config import URL_EVENTS  # noqa
+from pyglialo import PyGlialo, get_data_from_url  # noqa
 from flask_pyGlialo import *  # noqa
+
 
 def fake_data_empty(url):
     return {}
@@ -269,7 +268,7 @@ class TestPyGlialo(unittest.TestCase):
         self.assertEqual(len(py.event_rsvps['results']), 0)
         self.assertEqual(py.winner['name'], 'Foobar')
         self.assertEqual(py.winner['member_id'], 1)
-        self.assertEqual(py.winner['photo_url'], '/static/img/No_image.png')
+        self.assertEqual(py.winner['photo_url'], '/static/img/no_image.png')
 
     def test_extract_winner_empty_rsvps(self):
         py = PyGlialo()
