@@ -1,0 +1,12 @@
+<div class="row marketing">
+    <div class="col-lg-12">
+        {% if winners %}
+            <h6>Winner So Far</h6>
+            {% for user in winners %}
+                <span class="tag tag-success">{{ user }}</span>
+            {% endfor %}
+        {% else %}
+            <span class="tag tag-warning">No winner so far :(</span>
+        {% endif %}
+    </div>
+</div>
