@@ -15,7 +15,7 @@ import unittest  # noqa
 from unittest.mock import patch, MagicMock  # noqa
 from config import URL_EVENTS  # noqa
 from pyglialo import PyGlialo, get_data_from_url  # noqa
-from flask_pyGlialo import *  # noqa
+import flask_pyGlialo
 
 
 def fake_data_empty(url):
@@ -275,6 +275,20 @@ class TestPyGlialo(unittest.TestCase):
         py.extract_safe_winner()
         self.assertIsNone(py.winner)
 
+
+class TestPyGlialoApp(unittest.TestCase):
+    def setUp(self):
+        self.app = flask_pyGlialo.app.test_client()
+
+    def test_index(self):
+        response = self.app.get('/')
+        self.assertEqual(response.status_code, 200)
+
+    @patch('pyglialo.PyGlialo.load_meetup_data')
+    def test_reset(self, piglialo_mock):
+        response = self.app.get('/reset')
+        piglialo_mock.assert_called_with()
+        self.assertEqual(response.status_code, 302)
 
 if __name__ == '__main__':
     try:
