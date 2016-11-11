@@ -4,18 +4,13 @@ from pyglialo import PyGlialo
 
 app = Flask(__name__)
 piglialo = PyGlialo()
-piglialo.load_meetup_data()
 
 
 @app.route('/')
-def index():
-    return render_template('index.html', event=piglialo.event)
-
-
 @app.route('/reset')
-def reset_app():
+def index():
     piglialo.load_meetup_data()
-    return redirect(url_for('index'))
+    return render_template('index.html', event=piglialo.event)
 
 
 @app.route('/random')
