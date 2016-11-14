@@ -292,6 +292,23 @@ class TestPyGlialoApp(unittest.TestCase):
         piglialo_mock.assert_called_with()
         self.assertEqual(response.status_code, 200)
 
+    @patch('pyglialo.PyGlialo.list_of_winners', return_value=[])
+    @patch('pyglialo.PyGlialo.winner')
+    @patch('pyglialo.PyGlialo.extract_safe_winner')
+    def test_random_winner(self, piglialo_mock, piglialo_mock_winner, piglialo_mock_list_of_winners):
+        response = self.app.get('/random')
+        piglialo_mock.assert_called_with()
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('Rolling for goodies Number' in str(response.data))
+
+    @patch('pyglialo.PyGlialo.list_of_winners', return_value=[])
+    @patch('pyglialo.PyGlialo.extract_safe_winner')
+    def test_random_no_winner(self, piglialo_mock, piglialo_mock_list_of_winners):
+        response = self.app.get('/random')
+        piglialo_mock.assert_called_with()
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue('No one else can win!!!' in str(response.data))
+
 
 if __name__ == '__main__':
     try:
