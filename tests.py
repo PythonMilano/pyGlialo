@@ -12,9 +12,10 @@ cov.exclude('if __name__ == .__main__.:')
 
 cov.start()
 
+import datetime  # noqa
 import os  # noqa
 import unittest  # noqa
-from unittest.mock import patch, MagicMock, Mock, PropertyMock  # noqa
+from unittest.mock import patch, MagicMock, PropertyMock  # noqa
 from config import URL_EVENTS  # noqa
 from pyglialo import PyGlialo, get_data_from_url  # noqa
 import flask_pyGlialo
@@ -276,6 +277,15 @@ class TestPyGlialo(unittest.TestCase):
         py = PyGlialo()
         py.extract_safe_winner()
         self.assertIsNone(py.winner)
+
+    def test_save_winners_list(self):
+        py = PyGlialo()
+        py.list_of_winners = ['antani', 'tapioca']
+        py.save_winners_list()
+        try:
+            os.remove('winner_list_{}.txt'.format(datetime.datetime.now().strftime('%Y-%m-%d')))
+        except FileNotFoundError:
+            self.fail('Something went wrong.')
 
 
 class TestPyGlialoApp(unittest.TestCase):
