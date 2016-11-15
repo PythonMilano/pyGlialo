@@ -327,6 +327,14 @@ class TestPyGlialoApp(unittest.TestCase):
             self.assertEqual(response.status_code, 302)
             remove_rsvp_mock.assert_called_with('tapioca')
 
+    def test_saved(self):
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock_list_of_winners:
+            mock_list_of_winners.return_value = ['antani', 'tapioca']
+            response = self.app.get('/saved')
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue('Winner for slot 2' in str(response.data))
+            self.assertTrue('tapioca' in str(response.data))
+
 if __name__ == '__main__':
     try:
         unittest.main()
