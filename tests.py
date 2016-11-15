@@ -8,6 +8,8 @@ cov = coverage(branch=True, omit=['*/flask/*',
                                   '*/itsdangerous.py',
                                   '*/markupsafe/*',
                                   'tests.py'])
+cov.exclude('if __name__ == .__main__.:')
+
 cov.start()
 
 import os  # noqa
