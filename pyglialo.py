@@ -22,6 +22,9 @@ class PyGlialo(object):
     list_of_winners = None
     winner = None
 
+    def __init__(self):
+        self.list_of_winners = []
+
     def load_meetup_data(self):
         data = get_data_from_url(URL_EVENTS)
         if data:
@@ -60,3 +63,6 @@ class PyGlialo(object):
             out_file.write("Lista vincitori per i goodies\n")
             for winner in self.list_of_winners:
                 out_file.write("{}\n".format(winner))
+
+
+pyglialo = PyGlialo()
