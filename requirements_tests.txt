@@ -1,0 +1,3 @@
+coverage>4
+flake8>3
+-r requirements.txt

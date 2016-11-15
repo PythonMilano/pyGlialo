@@ -1,54 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>pyGlialo - giving away the goodies</title>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="static/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="static/css/jumbotron-narrow.css">
-</head>
-<body>
-<div class="container">
-    <div class="header clearfix">
-        <h2 class="text-muted">pyGlialo</h2>
-        <i> giving away the goodies</i>
+{% extends "base.html" %}
+{% block content %}
+    <img class="img-rounded" src="static/img/pyBiscione_200x200.png">
+    {% if event %}
+        <h3>{{ event.name }}</h3>
+        <h4>{{ event.venue.name }}</h4>
+    {% else: %}
+        <h3 class="alert-danger">Secret key not set</h3>
+    {% endif %}
+    <br>
+    <div class="img-rounded important-info">
+        <h4>
+            C'è in palio <em>una</em> licenza offerta da Jetbrains.
+        </h4>
+        <p>
+            Enjoy.
+        </p>
     </div>
-
-    <div class="jumbotron">
-        <p class="lead">Estrazione per Python Milano</p>
-        <br>
-
-        <img src="static/img/pyBiscione-v2-round.png">
-
-        <h1>{{event.name}}</h1>
-        <h4>{{event.venue.name}}</h4>
-        <br>
-
-        <div class="img-rounded important-info">
-            <h2>
-                C'è in palio <em>una</em> licenza offerta da Jetbrains.
-            </h2>
-
-            <p>
-                Enjoy.
-            </p>
-
-        </div>
-
-
-        <a class="btn btn-lg btn-warning" href="random" role="button">Let's Start!</a>
-
-    </div>
-
-    <footer class="footer">
-        <p>&copy; <a href="http://pythonmilano.xyz" target="_blank"> python milano</a> - pyGlialo</p>
-        {# <p>made with <3 with Flask</p>#}
-        <div id="debug">
-        </div>
-    </footer>
-
-</div> <!-- /container -->
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-</body>
-</html>
+    <a class="btn btn-lg btn-warning" href="random" role="button">
+        Let's Start! <i class="fa fa-play" aria-hidden="true"></i>
+    </a>
+{% endblock content %}
