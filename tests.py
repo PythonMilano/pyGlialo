@@ -369,4 +369,4 @@ if __name__ == '__main__':
     cov.report()
     print("HTML version: {}/tmp/coverage/index.html".format(os.path.join(os.path.abspath(os.path.dirname(__file__)))))
     cov.html_report(directory='tmp/coverage')
-    cov.erase()
+    # cov.erase()
