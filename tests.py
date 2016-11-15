@@ -12,7 +12,7 @@ cov.start()
 
 import os  # noqa
 import unittest  # noqa
-from unittest.mock import patch, MagicMock  # noqa
+from unittest.mock import patch, MagicMock, Mock, PropertyMock  # noqa
 from config import URL_EVENTS  # noqa
 from pyglialo import PyGlialo, get_data_from_url  # noqa
 import flask_pyGlialo
@@ -309,6 +309,21 @@ class TestPyGlialoApp(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTrue('No one else can win!!!' in str(response.data))
 
+    @patch('werkzeug.utils.redirect')
+    def test_save_winner_already_in_list(self, redirect_mock):
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock:
+            mock.return_value = ['antani']
+            response = self.app.get('/save/antani/')
+            self.assertEqual(response.status_code, 302)
+
+
+    @patch('pyglialo.PyGlialo.remove_rsvp')
+    def test_save_winner_in_list(self, remove_rsvp_mock):
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock:
+            mock.return_value = ['antani']
+            response = self.app.get('/save/tapioca/')
+            self.assertEqual(response.status_code, 302)
+            remove_rsvp_mock.assert_called_with('tapioca')
 
 if __name__ == '__main__':
     try:
