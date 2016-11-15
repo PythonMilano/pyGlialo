@@ -292,35 +292,37 @@ class TestPyGlialoApp(unittest.TestCase):
         piglialo_mock.assert_called_with()
         self.assertEqual(response.status_code, 200)
 
-    @patch('pyglialo.PyGlialo.list_of_winners', return_value=[])
     @patch('pyglialo.PyGlialo.winner')
     @patch('pyglialo.PyGlialo.extract_safe_winner')
-    def test_random_winner(self, piglialo_mock, piglialo_mock_winner, piglialo_mock_list_of_winners):
-        response = self.app.get('/random')
-        piglialo_mock.assert_called_with()
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('Rolling for goodies Number' in str(response.data))
+    def test_random_winner(self, piglialo_mock, piglialo_mock_winner):
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock_list_of_winners:
+            mock_list_of_winners.return_value = ['antani', 'tatablinda']
+            response = self.app.get('/random')
+            piglialo_mock.assert_called_with()
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue('Rolling for goodies Number' in str(response.data))
 
-    @patch('pyglialo.PyGlialo.list_of_winners', return_value=[])
     @patch('pyglialo.PyGlialo.extract_safe_winner')
-    def test_random_no_winner(self, piglialo_mock, piglialo_mock_list_of_winners):
-        response = self.app.get('/random')
-        piglialo_mock.assert_called_with()
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue('No one else can win!!!' in str(response.data))
+    def test_random_no_winner(self, piglialo_mock):
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock_list_of_winners:
+            mock_list_of_winners.return_value = []
+            response = self.app.get('/random')
+            piglialo_mock.assert_called_with()
+            self.assertEqual(response.status_code, 200)
+            self.assertTrue('No one else can win!!!' in str(response.data))
 
     @patch('werkzeug.utils.redirect')
     def test_save_winner_already_in_list(self, redirect_mock):
-        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock:
-            mock.return_value = ['antani']
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock_list_of_winners:
+            mock_list_of_winners.return_value = ['antani']
             response = self.app.get('/save/antani/')
             self.assertEqual(response.status_code, 302)
 
 
     @patch('pyglialo.PyGlialo.remove_rsvp')
     def test_save_winner_in_list(self, remove_rsvp_mock):
-        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock:
-            mock.return_value = ['antani']
+        with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as mock_list_of_winners:
+            mock_list_of_winners.return_value = ['antani']
             response = self.app.get('/save/tapioca/')
             self.assertEqual(response.status_code, 302)
             remove_rsvp_mock.assert_called_with('tapioca')

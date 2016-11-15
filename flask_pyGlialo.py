@@ -24,7 +24,6 @@ def spread_the_goodies():
 
 @app.route('/save/<name>/')
 def save_winner(name):
-    print(pyglialo.list_of_winners)
     if name not in pyglialo.list_of_winners:
         pyglialo.list_of_winners.append(name)
         pyglialo.remove_rsvp(name)
