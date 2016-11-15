@@ -1,8 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
     <img class="img-rounded" src="static/img/pyBiscione_200x200.png">
-    <h3>{{ event.name }}</h3>
-    <h4>{{ event.venue.name }}</h4>
+    {% if event %}
+        <h3>{{ event.name }}</h3>
+        <h4>{{ event.venue.name }}</h4>
+    {% else: %}
+        <h3 class="alert-danger">Secret key not set</h3>
+    {% endif %}
     <br>
     <div class="img-rounded important-info">
         <h4>

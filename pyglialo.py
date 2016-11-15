@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import datetime
 import json
 import random
@@ -21,6 +22,9 @@ class PyGlialo(object):
     event = None
     list_of_winners = None
     winner = None
+
+    def __init__(self):
+        self.list_of_winners = []
 
     def load_meetup_data(self):
         data = get_data_from_url(URL_EVENTS)
@@ -54,9 +58,12 @@ class PyGlialo(object):
                 break
 
     def save_winners_list(self):
-        file_date = datetime.datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-        with open("winner_list_{}.txt".format(file_date), "w") as out_file:
-            out_file.write("File generato il: {}\n".format(file_date))
+        file_date = datetime.datetime.now()
+        with open("winner_list_{}.txt".format(file_date.strftime("%Y-%m-%d")), "w") as out_file:
+            out_file.write("File generato il: {}\n".format(file_date.strftime("%Y-%m-%d_%H:%M:%S")))
             out_file.write("Lista vincitori per i goodies\n")
             for winner in self.list_of_winners:
                 out_file.write("{}\n".format(winner))
+
+
+pyglialo = PyGlialo()
