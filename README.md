@@ -1,6 +1,7 @@
 # pyGlialo
 our solution to spread the goodies
 
+[![Build Status](https://travis-ci.org/PythonMilano/pyGlialo.svg?branch=develop)](https://travis-ci.org/PythonMilano/pyGlialo)
 
 ### How to use
 #### this use Python 3 and Flask
