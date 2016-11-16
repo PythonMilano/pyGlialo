@@ -7,6 +7,7 @@ cov = coverage(branch=True, omit=['*/flask/*',
                                   '*/werkzeug/*',
                                   '*/itsdangerous.py',
                                   '*/markupsafe/*',
+                                  'config.py',
                                   'tests.py'])
 cov.exclude('if __name__ == .__main__.:')
 
