@@ -38,24 +38,18 @@ class PyGlialo(object):
 
     def extract_safe_winner(self):
         self.winner = None
-        if self.event_rsvps and len(self.event_rsvps['results']):
-            lucky_number = random.randint(0, abs(len(self.event_rsvps['results']) - 1))
-            winner = self.event_rsvps['results'][lucky_number]
-            self.remove_rsvp(winner['member']['member_id'])
+        if self.event_rsvps and len(self.event_rsvps):
+            lucky_number = random.randint(0, abs(len(self.event_rsvps) - 1))
+            winner = self.event_rsvps[lucky_number]
+            self.event_rsvps.remove(winner)
             if winner['response'] == 'yes':
                 self.winner = {
                     'name': winner['member']['name'],
-                    'member_id': winner['member']['member_id'],
-                    'photo_url': winner.get('member_photo', {}).get('photo_link', '/static/img/no_image.png')
+                    'member_id': winner['member']['id'],
+                    'photo_url': winner['member'].get('photo', {}).get('photo_link', '/static/img/no_image.png')
                 }
             else:
                 self.extract_safe_winner()
-
-    def remove_rsvp(self, rsvp_id):
-        for idx, result in enumerate(self.event_rsvps['results']):
-            if rsvp_id == result['member']['member_id']:
-                self.event_rsvps['results'].pop(idx)
-                break
 
     def save_winners_list(self):
         file_date = datetime.datetime.now()
