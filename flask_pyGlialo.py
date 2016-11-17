@@ -27,7 +27,6 @@ def spread_the_goodies():
 def save_winner(name):
     if name not in pyglialo.list_of_winners:
         pyglialo.list_of_winners.append(name)
-        pyglialo.remove_rsvp(name)
     return redirect(url_for('saved'))
 
 
