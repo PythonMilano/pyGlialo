@@ -1,7 +1,7 @@
 # pyGlialo
 our solution to spread the goodies
 
-[![Build Status](https://travis-ci.org/PythonMilano/pyGlialo.svg?branch=master)](https://travis-ci.org/PythonMilano/pyGlialo) [![Coverage Status](https://coveralls.io/repos/github/PythonMilano/pyGlialo/badge.svg)](https://coveralls.io/github/PythonMilano/pyGlialo)
+[![Build Status](https://travis-ci.org/PythonMilano/pyGlialo.svg?branch=master)](https://travis-ci.org/PythonMilano/pyGlialo) [![Coverage Status](https://coveralls.io/repos/github/PythonMilano/pyGlialo/badge.svg?branch=master)](https://coveralls.io/github/PythonMilano/pyGlialo?branch=master)
 
 ## How to use
 ### Installing
