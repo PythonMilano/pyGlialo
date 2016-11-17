@@ -8,7 +8,8 @@ cov = coverage(branch=True, omit=['*/flask/*',
                                   '*/itsdangerous.py',
                                   '*/markupsafe/*',
                                   'config.py',
-                                  'tests.py'])
+                                  'tests.py',
+                                  'secrets.py'])
 cov.exclude('if __name__ == .__main__.:')
 
 cov.start()
@@ -17,9 +18,10 @@ import datetime  # noqa
 import os  # noqa
 import unittest  # noqa
 from unittest.mock import patch, MagicMock, PropertyMock  # noqa
+
+import flask_pyGlialo  # noqa
 from config import URL_EVENTS  # noqa
 from pyglialo import PyGlialo, get_data_from_url  # noqa
-import flask_pyGlialo
 
 
 def fake_data_empty(url):
@@ -241,8 +243,7 @@ class TestPyGlialoApp(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertTrue('No one else can win!!!' in str(response.data))
 
-    @patch('werkzeug.utils.redirect')
-    def test_save_winner_already_in_list(self, redirect_mock):
+    def test_save_winner_already_in_list(self):
         with patch.object(PyGlialo, 'list_of_winners', new_callable=PropertyMock) as list_of_winners_mock:
             list_of_winners_mock.return_value = ['antani']
             response = self.app.get('/save/antani/')
@@ -284,4 +285,4 @@ if __name__ == '__main__':
     cov.report()
     print("HTML version: {}/tmp/coverage/index.html".format(os.path.join(os.path.abspath(os.path.dirname(__file__)))))
     cov.html_report(directory='tmp/coverage')
-    # cov.erase()
+
