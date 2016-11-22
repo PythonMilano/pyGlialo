@@ -1,27 +1,13 @@
 # -*- coding: utf-8 -*-
-from coverage import coverage
 
-cov = coverage(branch=True, omit=['*/flask/*',
-                                  '*/click/*',
-                                  '*/jinja2/*',
-                                  '*/werkzeug/*',
-                                  '*/itsdangerous.py',
-                                  '*/markupsafe/*',
-                                  'config.py',
-                                  'tests.py',
-                                  'secrets.py'])
-cov.exclude('if __name__ == .__main__.:')
+import datetime
+import os
+import unittest
+from unittest.mock import patch, MagicMock, PropertyMock
 
-cov.start()
-
-import datetime  # noqa
-import os  # noqa
-import unittest  # noqa
-from unittest.mock import patch, MagicMock, PropertyMock  # noqa
-
-import flask_pyGlialo  # noqa
-from config import URL_EVENTS  # noqa
-from pyglialo import PyGlialo, get_data_from_url  # noqa
+import flask_pyGlialo
+from config import URL_EVENTS
+from pyglialo import PyGlialo, get_data_from_url
 
 
 def fake_data_empty(url):
@@ -259,13 +245,4 @@ class TestPyGlialoApp(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    try:
-        unittest.main()
-    except:
-        pass
-    cov.stop()
-    cov.save()
-    print("\n\nCoverage Report:\n")
-    cov.report()
-    print("HTML version: {}/tmp/coverage/index.html".format(os.path.join(os.path.abspath(os.path.dirname(__file__)))))
-    cov.html_report(directory='tmp/coverage')
+    unittest.main()
