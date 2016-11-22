@@ -90,9 +90,6 @@ def fake_data_load(url):
                 'member': {
                     'id': 2,
                     'name': 'Antani Tatablinda',
-                    'photo': {
-                        'photo_link': 'http://url/to/photos/member.jpg',
-                    },
                 },
             },
             {
@@ -146,21 +143,14 @@ class TestPyGlialo(unittest.TestCase):
         self.assertEqual(len(py.event_rsvps), 3)
         self.assertEqual(py.list_of_winners, [])
 
-    def test_extract_winner(self):
+    @patch('random.randint', return_value=0)
+    def test_extract_winner(self, random_patched):
         py = PyGlialo()
-        py.event_rsvps = [{
-            'response': 'yes',
-            'member': {
-                'id': 2,
-                'name': 'Antani Tatablinda',
-                'photo': {
-                    'photo_link': 'http://url/to/photos/member.jpg',
-                }
-            }
-        }]
+        py.event_rsvps = fake_data_load('fake_data')
         py.extract_safe_winner()
-        self.assertEqual(py.winner['name'], 'Antani Tatablinda')
-        self.assertEqual(py.winner['member_id'], 2)
+        self.assertEqual(py.winner['name'], 'Tatablinda Tapioca')
+        self.assertEqual(py.winner['member_id'], 1)
+        self.assertEqual(len(py.event_rsvps), 2)
 
     @patch('random.randint', return_value=0)
     def test_extract_winner_no_rsvp(self, random_patched):
@@ -178,17 +168,11 @@ class TestPyGlialo(unittest.TestCase):
         py.extract_safe_winner()
         self.assertEqual(len(py.event_rsvps), 0)
 
-    def test_extract_winner_no_photo(self):
+    @patch('random.randint', return_value=1)
+    def test_extract_winner_no_photo(self, random_patched):
         py = PyGlialo()
-        py.event_rsvps = [{
-            'response': 'yes',
-            'member': {
-                'id': 2,
-                'name': 'Antani Tatablinda',
-            }
-        }]
+        py.event_rsvps = fake_data_load('fake_data')
         py.extract_safe_winner()
-        self.assertEqual(len(py.event_rsvps), 0)
         self.assertEqual(py.winner['name'], 'Antani Tatablinda')
         self.assertEqual(py.winner['member_id'], 2)
         self.assertEqual(py.winner['photo_url'], '/static/img/no_image.png')
@@ -285,4 +269,3 @@ if __name__ == '__main__':
     cov.report()
     print("HTML version: {}/tmp/coverage/index.html".format(os.path.join(os.path.abspath(os.path.dirname(__file__)))))
     cov.html_report(directory='tmp/coverage')
-
