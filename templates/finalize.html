@@ -2,11 +2,9 @@
 {% block content %}
     <h1>Ecco i vincitori</h1>
     <img src="static/img/winning.png">
-    <h2>
+    <ul class="list-group py-3">
         {% for user in winners %}
-            {{ user }}
-            {% if not loop.last %}<br>
-            {% endif %}
+            <li class="list-group-item list-group-item-success"><h2>{{ user }}</h2></li>
         {% endfor %}
-    </h2>
+    </ul>
 {% endblock content %}
