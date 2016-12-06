@@ -2,7 +2,7 @@
 {% block content %}
     <p class="lead">{{ lead_text }}</p>
     {% if winner %}
-        <div class="pull-left col-lg-7 clearfix">
+        <div class="pull-left col-xs-12 col-md-8 clearfix">
             <a {% if winner.member_id != '000000' %}
                 href="http://www.meetup.com/Python-Milano/members/{{ winner.member_id }}" target="_blank"
             {% else %}
@@ -14,7 +14,7 @@
             <h2 class="text-center">{{ winner.name }}</h2>
         </div>
 
-        <ul class="list-group pull-right">
+        <ul class="list-group col-xs-12 col-md-4">
             <li class="list-group-item">
                 {% include "includes/buttons/claim.html" %}
             </li>
