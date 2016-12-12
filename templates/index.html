@@ -2,8 +2,10 @@
 {% block content %}
     <img class="img-rounded" src="static/img/pyBiscione_200x200.png">
     {% if event %}
-        <h3>{{ event.name }}</h3>
-        <h4>{{ event.venue.name }}</h4>
+    <div class="my-2">
+        <h1>{{ event.name }}</h1>
+        <h3>{{ event.venue.name }}</h3>
+    </div>
     {% else: %}
         <h3 class="alert-danger">Secret key not set</h3>
     {% endif %}
@@ -16,7 +18,9 @@
             Enjoy.
         </p>
     </div>
-    <a class="btn btn-lg btn-warning" href="random" role="button">
-        Let's Start! <i class="fa fa-play" aria-hidden="true"></i>
-    </a>
+    <div class="mt-2">
+        <a class="btn btn-lg btn-warning" href="random" role="button">
+            Let's Start! <i class="fa fa-play" aria-hidden="true"></i>
+        </a>
+    </div>
 {% endblock content %}
