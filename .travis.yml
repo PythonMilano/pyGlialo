@@ -5,6 +5,7 @@ python:
 install:
   - pip install -r requirements_tests.txt
 script:
-  python tests.py
+  - coverage run tests.py
+  - coverage report
 after_success:
   coveralls

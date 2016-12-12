@@ -2,11 +2,11 @@
 {% block content %}
     <p class="lead">{{ lead_text }}</p>
     <br>
-    <div class="col-lg-7">
+    <div class="col-xs-12 col-md-8 clearfix">
         <img src="static/img/winning.png" width="300">
-        <h2>{{ winner.name }}</h2>
+        <h2 class="my-2">{{ winner.name }}</h2>
     </div>
-    <ul class="list-group pull-right">
+    <ul class="list-group col-xs-12 col-md-4">
         <li class="list-group-item">
             {% include "includes/buttons/shuffle.html" %}
         </li>
