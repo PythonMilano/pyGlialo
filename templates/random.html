@@ -29,6 +29,10 @@
             {# <a class="btn-sm btn-danger" href="pass" role="button">Leave slot empty</a>#}
             {# </li>#}
         </ul>
+    {% else %}
+        {% if winners %}
+            {% include "includes/buttons/finalize.html" %}
+        {% endif %}
     {% endif %}
 {% endblock content %}
 {% block marketing %}
