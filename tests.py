@@ -14,7 +14,85 @@ def fake_data_empty(url):
     return {}
 
 
-def fake_data_load(url):
+def fake_data_load_past(url):
+    """
+    Omitted some json response that pyGlialo doesn't use
+    :param url:
+    :return:
+    """
+    if url == URL_EVENTS + '?status=past':
+        return [{
+            'rsvp_limit': 50,
+            'visibility': 'public',
+            'created': 1477550982000,
+            'updated': 1478255480000,
+            'description': '...',
+            'time': 1480528800000,
+            'name': "Python Mashup! Casi d'uso: virtualenv, Fabric, uWSGI, ngnix, Vagrant...",
+            'waitlist_count': 0,
+            'utc_offset': 3600000,
+            'yes_rsvp_count': 2,
+            'link': 'http://www.meetup.com/Python-Milano/events/235147743/',
+            'group': {
+                'who': 'Pythonista',
+                'created': 1371202502000,
+                'id': 8923782,
+                'lat': 45.459999084472656,
+                'urlname': 'Python-Milano',
+                'name': 'Python Milano',
+                'lon': 9.1899995803833,
+                'join_mode': 'open'
+            },
+            'duration': 7200000,
+            'status': 'upcoming',
+            'how_to_find_us': 'vagrant fabric python postgres uwsgi devops',
+            'venue': {
+                'id': 24633392,
+                'name': 'Mikamai/LinkMe',
+                'lat': 45.49055480957031,
+                'lon': 9.215377807617188,
+                'repinned': 'false',
+                'address_1': 'Via Giulio e Corrado Venini, 42',
+                'city': 'Milano',
+                'country': 'it',
+                'localized_country_name': 'Italia'
+            },
+            'id': '235147743'
+        }]
+    elif url == URL_EVENTS:
+        return []
+    else:
+        return [
+            {
+                'response': 'yes',
+                'member': {
+                    'id': 1,
+                    'name': 'Tatablinda Tapioca',
+                    'photo': {
+                        'photo_link': 'http://url/to/photos/member.jpg',
+                    },
+                }
+            },
+            {
+                'response': 'yes',
+                'member': {
+                    'id': 2,
+                    'name': 'Antani Tatablinda',
+                },
+            },
+            {
+                'response': 'no',
+                'member': {
+                    'id': 3,
+                    'name': 'Arnoldo Truffaldoni',
+                    'photo': {
+                        'photo_link': 'http://url/to/photos/member.jpg',
+                    },
+                }
+            }
+        ]
+
+def fake_data_load_current(url):
     """
     Omitted some json response that pyGlialo doesn't use
     :param url:
@@ -90,7 +168,6 @@ def fake_data_load(url):
             }
         ]
 
-
 def fake_randint():
     return 1
 
@@ -119,8 +196,17 @@ class TestPyGlialo(unittest.TestCase):
         self.assertEqual(py.event_rsvps, {})
         self.assertEqual(py.list_of_winners, [])
 
-    @patch('pyglialo.get_data_from_url', side_effect=fake_data_load)
-    def test_load_meetup_data_nearest_meetup(self, fake_data):
+    @patch('pyglialo.get_data_from_url', side_effect=fake_data_load_past)
+    def test_load_meetup_data_nearest_past_meetup(self, fake_data):
+        py = PyGlialo()
+        py.load_meetup_data()
+        self.assertEqual(py.event.get('id', None), '235147743')
+        self.assertEqual(py.event_id, '235147743')
+        self.assertEqual(len(py.event_rsvps), 3)
+        self.assertEqual(py.list_of_winners, [])
+
+    @patch('pyglialo.get_data_from_url', side_effect=fake_data_load_current)
+    def test_load_meetup_data_nearest_current_meetup(self, fake_data):
         py = PyGlialo()
         py.load_meetup_data()
         self.assertEqual(py.event.get('id', None), '235147743')
@@ -131,7 +217,7 @@ class TestPyGlialo(unittest.TestCase):
     @patch('random.randint', return_value=0)
     def test_extract_winner(self, random_patched):
         py = PyGlialo()
-        py.event_rsvps = fake_data_load('fake_data')
+        py.event_rsvps = fake_data_load_current('fake_data')
         py.extract_safe_winner()
         self.assertEqual(py.winner['name'], 'Tatablinda Tapioca')
         self.assertEqual(py.winner['member_id'], 1)
@@ -156,7 +242,7 @@ class TestPyGlialo(unittest.TestCase):
     @patch('random.randint', return_value=1)
     def test_extract_winner_no_photo(self, random_patched):
         py = PyGlialo()
-        py.event_rsvps = fake_data_load('fake_data')
+        py.event_rsvps = fake_data_load_current('fake_data')
         py.extract_safe_winner()
         self.assertEqual(py.winner['name'], 'Antani Tatablinda')
         self.assertEqual(py.winner['member_id'], 2)

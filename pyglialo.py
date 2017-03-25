@@ -24,21 +24,16 @@ class PyGlialo(object):
 
     def __init__(self):
         self.list_of_winners = []
-        self._event_cache = None
-
-    @property
-    def event(self):
-        if self._event_cache is None:
-            current_data = get_data_from_url(URL_EVENTS)
-            past_data = get_data_from_url(URL_EVENTS + '?status=past')
-            if current_data:
-                self._event_cache = min(current_data, key=lambda event: abs(event['time'] - time.time()))
-            elif past_data:
-                self._event_cache = max(past_data, key=lambda event: abs(event['time'] - time.time()))
-        return self._event_cache or {}
+        self.event = {}
+        current_events = get_data_from_url(URL_EVENTS)
+        past_events = get_data_from_url(URL_EVENTS + '?status=past')
+        if current_events:
+            self.event = min(current_events, key=lambda event: abs(event['time'] - time.time()))
+        if not current_events and past_events:
+            self.event = max(past_events, key=lambda event: abs(event['time'] - time.time()))
 
     def load_meetup_data(self):
-        self.event_id = self.event.get('id', None)
+        self.event_id = self.event.get('id')
         self.event_rsvps = get_data_from_url(URL_RSVPS.format(id=self.event_id))
         self.list_of_winners = []
 
