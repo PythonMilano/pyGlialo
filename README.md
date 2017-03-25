@@ -8,43 +8,51 @@ our solution to spread the goodies
 
 __this project use Python 3 and Flask__
 
- 1. Clone the project and checkout `develop`
+It's preferable to develop inside a `virtualenv` environment.
 
- 1. Create a file named `secrets.py` with the string `meetup_api_key` inside, use this to assign
-[your personal api key from meetup](https://secure.meetup.com/it/meetup_api/key/),  
-it should look like something like this (31 char long, this one is fake): ```meetup_api_key = '781a5b2c2d7e332f803f325625361e9'```
+ 1. Clone the project and checkout `master`
 
- 1. Install using `requirements.txt`
+ 1. Install dependencies using `pip install -r requirements.txt`
 
-1. Run the application using `python3 flask_pyGlialo.py`
+ 1. Run the application using `python3 flask_pyGlialo.py`
 
-1. Open browser
+ 1. Open browser
 
 ### Branches
 
- - _master_: stable branch (We have Travis)
+ - _master_: stable branch (We have Travis and Coverage)
  - _develop_: branch for the latest development, if you want to contribute fork this one
 
 ### Bad Things
 
-See open issues
+See open issues.
 
 ## Contributing
-_not the final version_
 
-First thank you for contributing.
-
-### Code
-We kinda use gitflow, create a new branch from `develop` with a meaningful name and start coding.  
-
-Once you are satisfied and all the tests are green submit a PR.
+ 1. Fork the project
+ 
+ 1. Install dependecies using `pip install -r requirements_dev.txt`
+ 
+ 1. Once you are satisfied and all the tests are green submit a PR on `develop` branch
+ 
+Thank you for contributing.
 
 ## Credits
 
 ### People
-Todo:
+
+_Core_
+
+@zanza00
+@cstrap
+
+_Contributors_
+
+@jacopofar
+@rsalmaso
+@akita8
 
 ### Images
-- the Python Milano logo is from [here](https://github.com/PythonMilano/logo)
+- the Python Milano logo - rebranded! Kudos!!!
 - winning banana is from [clker](http://www.clker.com/clipart-52027.html)
 - sad banana is from [DeviantArt user rollingjennyh](http://rollingjennyh.deviantart.com/art/Sad-Banana-352394110)
