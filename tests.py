@@ -105,7 +105,6 @@ class TestGetDataFromUrl(unittest.TestCase):
 
 class TestPyGlialo(unittest.TestCase):
     def test_create_pyglialo(self):
-        self.assertIsNone(PyGlialo.event)
         self.assertIsNone(PyGlialo.event_id)
         self.assertIsNone(PyGlialo.event_rsvps)
         self.assertIsNone(PyGlialo.list_of_winners)
