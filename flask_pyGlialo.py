@@ -40,16 +40,6 @@ def saved():
     return render_template('saved.html', winner=winner, winners=pyglialo.list_of_winners, lead_text=lead_text)
 
 
-# FIXME: not working
-"""
-@app.route('/pass')
-def pass_extraction():
-    pyglialo.list_of_winners.append('empty_slot')
-    lead_text = 'Slot {} is empty :('.format(len(pyglialo.list_of_winners))
-    return render_template('pass.html', winners=pyglialo.list_of_winners, lead_text=lead_text)
-"""
-
-
 @app.route('/finalize')
 def finalize_the_goodies():
     pyglialo.save_winners_list()
