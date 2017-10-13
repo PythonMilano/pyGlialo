@@ -1,26 +1,8 @@
 {% extends "base.html" %}
 {% block content %}
-    <img class="img-rounded" src="static/img/pymi_200x200.png">
-    {% if event %}
-    <div class="my-2">
-        <h1>{{ event.name }}</h1>
-        <h3>{{ event.venue.name }}</h3>
-    </div>
-    {% else: %}
-        <h3 class="alert-danger">Secret key not set</h3>
-    {% endif %}
-    <br>
-    <div class="img-rounded important-info">
-        <h4>
-            C'è in palio <em>una</em> licenza offerta da Jetbrains.
-        </h4>
-        <p>
-            Enjoy.
-        </p>
-    </div>
-    <div class="mt-2">
-        <a class="btn btn-lg btn-warning" href="random" role="button">
-            Let's Start! <i class="fa fa-play" aria-hidden="true"></i>
-        </a>
-    </div>
+      <h1 class="display-3">{{ event.name.text }}</h1>
+      <div class="round">
+        <img src="static/imgs/logo.svg">
+      </div>
+      <div><a class="btn btn-lg btn-success" href="/wheel" role="button">START</a></div>
 {% endblock content %}

@@ -1,1 +1,8 @@
-flask>=0.10
+eventbrite==3.3.3
+flake8==3.4.1
+Flask==0.12.2
+gunicorn==19.7.1
+notifiers==0.5.1
+peewee==2.10.2
+psycopg2==2.7.3.1
+python-box==3.1.1

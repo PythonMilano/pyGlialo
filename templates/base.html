@@ -1,27 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="pyGlialo, giving away the goodies with a Wheel Of Fortune!">
+    <meta name="author" content="PyMI">
+
+    <link rel="apple-touch-icon" sizes="152x152" href="/static/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicons/manifest.json">
+    <link rel="mask-icon" href="/static/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    
     <title>pyGlialo - giving away the goodies</title>
-    <link rel="stylesheet" href="static/css/bootstrap.min.css">
-    <!--<link rel="stylesheet" href="static/css/bootstrap-theme.min.css">-->
-    <link rel="stylesheet" href="static/css/jumbotron-narrow.css">
-    <link rel="stylesheet" href="static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="static/css/style.css">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+        crossorigin="anonymous">
+    <link href="static/css/custom.css" rel="stylesheet">
+
+    {% block extracss %}{% endblock extracss %}
+
 </head>
+
 <body>
-<div class="container">
-    {% include "includes/header.html" %}
-    <div class="jumbotron clearfix row">
-        {% block content %}
-        {% endblock content %}
+    <div class="container">
+
+        {% include "includes/header.html" %}
+        
+        <div class="jumbotron">
+            {% block content %} {% endblock content %}
+        </div>
+        
+        {% include "includes/footer.html" %}
+        
     </div>
-    {% block marketing %}
-    {% endblock marketing %}
-    {% include "includes/footer.html" %}
-</div> <!-- /container -->
-<script src="static/js/jquery.min.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
+
+    {% block extracontent %}{% endblock extracontent %}
+
+    {% block extrajs %}{% endblock extrajs %}
+
 </body>
+
 </html>

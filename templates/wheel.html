@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block extracss %}
+    <link rel="stylesheet" href="static/css/wheel.css">
+{% endblock extracss %}
+
+{% block content %}
+      <div class="the_wheel">
+        <canvas id="canvas" width="434" height="434">
+          Canvas not supported, use another browser.
+        </canvas>
+        <button id="the_spinner" class="btn btn-lg btn-success">SPIN!</button>
+      </div>
+{% endblock content %}
+
+{% block extracontent %}
+  <div id="myModal" class="modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">The winner is...</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p id="winner"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock extracontent %}
+
+{% block extrajs %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+      crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+      crossorigin="anonymous"></script>
+    <script src="static/js/winwheel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+  <script>
+    var theWheel = new Winwheel({
+      'outerRadius': 212,
+      'innerRadius': 0,
+      'textFontSize': 15,
+      'textOrientation': 'vertical', 
+      'textAlignment': 'outer',
+      'numSegments': {{ segments|length }},
+      'textFillStyle': '#000000',
+      'segments': {{ segments|safe }},
+      'animation':
+      {
+        'type': 'spinToStop',
+        'duration': 5,
+        'spins': 9,
+        'callbackFinished': 'alertPrize()'
+      }
+    });
+
+    $('#the_spinner').click(function () {
+      theWheel.startAnimation();
+    });
+
+    function alertPrize() {
+      var winningSegment = theWheel.getIndicatedSegment();
+      $('#winner').text(winningSegment.full_name);
+      $('#myModal').modal();
+    }
+
+    $('#myModal').on('hidden.bs.modal', function (e) {
+      theWheel.stopAnimation(false);
+      theWheel.rotationAngle = 0;
+      theWheel.draw();
+    });
+
+  </script>
+{% endblock extrajs %}

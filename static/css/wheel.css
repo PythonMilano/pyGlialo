@@ -1,0 +1,20 @@
+/* Sets the background image for the wheel */
+.the_wheel {
+    background-image: url(../imgs/wheel_back.png);
+    background-position: center;
+    background-repeat: none;
+    width: 438px;
+    height: 574px;
+    margin: auto;
+    text-align: center;
+    padding: 70px 0;
+    position: relative;
+}
+
+#the_spinner {
+    position: absolute;
+    top: 237px;
+    left: 160px;
+    border-radius: 50%;
+    padding: 30px;
+}
