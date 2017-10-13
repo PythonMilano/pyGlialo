@@ -7,7 +7,7 @@ from peewee import Proxy
 database_proxy = Proxy()
 migrator = None
 
-if os.environ['FLASK_DEBUG']:
+if os.environ.get('FLASK_DEBUG'):
     from peewee import SqliteDatabase
     from playhouse.migrate import SqliteMigrator
 

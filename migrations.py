@@ -3,7 +3,7 @@
 # from playhouse.migrate import migrate
 
 from models import Pythonista
-# from dbconn import migrator, database_proxy
+from dbconn import database_proxy  # , migrator
 
 MODELS = [
     Pythonista,
