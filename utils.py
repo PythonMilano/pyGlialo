@@ -15,6 +15,6 @@ def random_color():
 
 
 def slack_notifier(message):
-    if not os.environ.get('FLASK_DEBUG'):
+    if os.environ.get('SLACK_WEB_HOOK'):
         p = get_notifier('slack')
         p.notify(webhook_url=os.environ['SLACK_WEB_HOOK'], message=message)
