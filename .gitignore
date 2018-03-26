@@ -75,5 +75,6 @@ winner_list*.txt
 # VS code
 .vscode
 
-# Created by .ignore support plugin (hsz.mobi)
-
+# Files
+runapp.sh 
+pyglialo.db
